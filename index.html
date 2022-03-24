@@ -17,6 +17,46 @@
         <h1>Weather Dashboard</h1>
     </header>
 
+    <main class="m-3 d-flex">
+        <section class="search col-12 col-sm-4 col-lg-3">
+            <div class="search-container">
+                <h2>Search for a City:</h2>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="San Diego"/>
+                </div>
+                <button class="btn btn-search w-100 mt-3 mb-3">Search</button>
+            </div>
+            <div class="city-history">
+                <button class="btn btn-history mt-3">New York</button>
+            </div>
+        </section>
+        <section class="forecast col-12 col-sm-8 col-lg-9">
+            <div class="current-weather">
+                <h2 id="city-info">New York (3/24/2022)</h2>
+                <span>
+                    <p>Temp: </p>
+                    <p class="temperature">74</p>
+                    <p>°F</p>
+                </span>
+                <span>
+                    <p>Wind: </p>
+                    <p class="wind">4</p>
+                    <p> MPH</p>
+                </span>
+                <span>
+                    <p>Humidity: </p>
+                    <p class="humidity">46</p>
+                    <p>%</p>
+                </span>
+                <span>
+                    <p>UV Index: </p>
+                    <p class="uv uv-favorable">0.47</p>
+                </span>
+            </div>
+        </section>
+
+    </main>
+
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
