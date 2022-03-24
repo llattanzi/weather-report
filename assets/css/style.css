@@ -29,6 +29,10 @@ h1, h2, h3, h4 {
     width: 100%;
 }
 
+.current-weather {
+    border: solid 3px grey;
+}
+
 span {
     display: flex;
     white-space: pre-wrap;
@@ -52,7 +56,14 @@ span {
     background-color: #780000;
 }
 
+.forecast, main {
+    flex-wrap: wrap;
+}
+
 .card {
     background-color: #212436;
     color: white;
+    margin-bottom: 10px;
+    padding-top: 5px;
 }
+

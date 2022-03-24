@@ -12,12 +12,12 @@
   <title>Weather Report</title>
 </head>
 
-<body class="flex-column min-100-vh">
+<body>
     <header class="hero text-center p-3">
         <h1>Weather Dashboard</h1>
     </header>
 
-    <main class="m-3 d-flex">
+    <main class="m-3 flex-row d-flex">
         <section class="search col-12 col-sm-4 col-lg-3">
             <div class="search-container">
                 <h2>Search for a City:</h2>
@@ -30,28 +30,128 @@
                 <button class="btn btn-history mt-3">New York</button>
             </div>
         </section>
-        <section class="forecast col-12 col-sm-8 col-lg-9">
-            <div class="current-weather">
-                <h2 id="city-info">New York (3/24/2022)</h2>
+        <section class="col-12 col-sm-8 col-lg-9" id="city-weather">
+            <div class="current-weather p-2">
+                <h2 id="city-info">New York (3/24/2022)<img id="icon" src="" alt="Weather icon"></h2>
                 <span>
                     <p>Temp: </p>
-                    <p class="temperature">74</p>
+                    <p class="temperature"></p>
                     <p>°F</p>
                 </span>
                 <span>
                     <p>Wind: </p>
-                    <p class="wind">4</p>
+                    <p class="wind"></p>
                     <p> MPH</p>
                 </span>
                 <span>
                     <p>Humidity: </p>
-                    <p class="humidity">46</p>
+                    <p class="humidity"></p>
                     <p>%</p>
                 </span>
                 <span>
                     <p>UV Index: </p>
-                    <p class="uv uv-favorable">0.47</p>
+                    <p class="uv uv-favorable"></p>
                 </span>
+            </div>
+            <div>
+                <h3>5-Day Forecast:</h3>
+                <div class="forecast flex-row d-flex justify-content-between">
+                    <div class="card col-9 col-sm-5 col-lg-2">
+                        <h4 class="date">3/25/2022</h4>
+                        <img id="icon" src="" alt="Weather icon">
+                        <span>
+                            <p>Temp: </p>
+                            <p class="temperature"></p>
+                            <p>°F</p>
+                        </span>
+                        <span>
+                            <p>Wind: </p>
+                            <p class="wind"></p>
+                            <p> MPH</p>
+                        </span>
+                        <span>
+                            <p>Humidity: </p>
+                            <p class="humidity"></p>
+                            <p>%</p>
+                        </span>
+                    </div>
+                    <div class="card col-9 col-sm-5 col-lg-2">
+                        <h4 class="date"></h4>
+                        <img id="icon" src="" alt="Weather icon">
+                        <span>
+                            <p>Temp: </p>
+                            <p class="temperature"></p>
+                            <p>°F</p>
+                        </span>
+                        <span>
+                            <p>Wind: </p>
+                            <p class="wind"></p>
+                            <p> MPH</p>
+                        </span>
+                        <span>
+                            <p>Humidity: </p>
+                            <p class="humidity"></p>
+                            <p>%</p>
+                        </span>
+                    </div>
+                    <div class="card col-9 col-sm-5 col-lg-2">
+                        <h4 class="date"></h4>
+                        <img id="icon" src="" alt="Weather icon">
+                        <span>
+                            <p>Temp: </p>
+                            <p class="temperature"></p>
+                            <p>°F</p>
+                        </span>
+                        <span>
+                            <p>Wind: </p>
+                            <p class="wind"></p>
+                            <p> MPH</p>
+                        </span>
+                        <span>
+                            <p>Humidity: </p>
+                            <p class="humidity"></p>
+                            <p>%</p>
+                        </span>
+                    </div>
+                    <div class="card col-9 col-sm-5 col-lg-2">
+                        <h4 class="date"></h4>
+                        <img id="icon" src="" alt="Weather icon">
+                        <span>
+                            <p>Temp: </p>
+                            <p class="temperature"></p>
+                            <p>°F</p>
+                        </span>
+                        <span>
+                            <p>Wind: </p>
+                            <p class="wind"></p>
+                            <p> MPH</p>
+                        </span>
+                        <span>
+                            <p>Humidity: </p>
+                            <p class="humidity"></p>
+                            <p>%</p>
+                        </span>
+                    </div>
+                    <div class="card col-9 col-sm-5 col-lg-2">
+                        <h4 class="date"></h4>
+                        <img id="icon" src="" alt="Weather icon">
+                        <span>
+                            <p>Temp: </p>
+                            <p class="temperature"></p>
+                            <p>°F</p>
+                        </span>
+                        <span>
+                            <p>Wind: </p>
+                            <p class="wind"></p>
+                            <p> MPH</p>
+                        </span>
+                        <span>
+                            <p>Humidity: </p>
+                            <p class="humidity"></p>
+                            <p>%</p>
+                        </span>
+                    </div>
+                </div>
             </div>
         </section>
 
