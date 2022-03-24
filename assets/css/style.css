@@ -1,3 +1,39 @@
 body {
     font-family: "Open Sans", sans-serif;
 }
+
+header {
+    background-image: linear-gradient(to right, #4c66c7,#010436);
+    color: white;
+}
+
+.btn-search {
+    background-color: #519be0;
+    color: white;
+}
+
+.btn-history {
+    background-color: #a1a1a1;
+}
+
+.card {
+    background-color: #212436;
+    color: white;
+}
+
+.uv {
+    color: white;
+}
+
+.uv-favorable {
+    background-color: #016e03;
+}
+
+.uv-moderate {
+    background-color: #bab400;
+}
+
+.uv-severe {
+    background-color: #780000;
+}
+
