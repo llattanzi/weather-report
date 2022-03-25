@@ -1,7 +1,4 @@
-var cityWeather = {
-    city: [],
-    weather: []
-};
+var cities = [];
 
 // constants
 var uvFavorableLimit = 4;
@@ -98,10 +95,19 @@ var displayWeather = function(data, city) {
         $(".humidity").eq(i).text(data.daily[i].humidity);
     }
 
-    addHistory(data, city);
+    // check if city is already in history
+    // set city list and current city to lowercase for comparison
+    var citiesLowerCase = cities.map(cityEl => {
+        return cityEl.toLowerCase();
+    })
+    var cityLowerCase = city.toLowerCase();
+    // only add to history and local storage if city is not already in history
+    if (!citiesLowerCase.includes(cityLowerCase)) {
+        addHistory(city);
+    }
 }
 
-var addHistory = function(data, city) {
+var addHistory = function(city) {
     // add city button to page
     var cityButton = $("<button>")
         .addClass("btn btn-history mt-3")
@@ -114,21 +120,21 @@ var addHistory = function(data, city) {
 
     $(".city-history").append(cityButton);
     
-    cityWeather.city.push(city);
-    cityWeather.weather.push(data);
+    cities.push(city);
+    
     // limit history length in local storage
-    if (cityWeather > historyLimit) {
+    if (cities.length > historyLimit) {
         // if hit limit, remove oldest search
-        cityWeather = cityWeather.slice(1, cityWeather.length);
+        cities = cities.slice(1, cities.length);
     }
-    localStorage.setItem("cityWeather", JSON.stringify(cityWeather));
+    localStorage.setItem("cities", JSON.stringify(cities));
 }
 
 var loadHistory = function() {
-    for (i = 0; i < cityWeather.city.length; i++) {
+    for (i = 0; i < cities.length; i++) {
       var cityButton = $("<button>")
         .addClass("btn btn-history mt-3")
-        .text(cityWeather.city[i]);
+        .text(cities[i]);
 
         $(".city-history").append(cityButton);  
     }
@@ -144,11 +150,13 @@ $(".btn-search").click(function() {
 
 // city button clicked in history list
 $(".city-history").on("click", "button", function() {
+    // get index of button clicked
     var buttonIndex = $(this).index();
-    console.log(buttonIndex)
+    // run stored weather data for city through getCoordinates to get updated weather for city and display
+    getCoordinates(cities[buttonIndex]); 
 })
 
-if (localStorage.getItem("cityWeather")) {
-    cityWeather = JSON.parse(localStorage.getItem("cityWeather"));
+if (localStorage.getItem("cities")) {
+    cities = JSON.parse(localStorage.getItem("cities"));
     loadHistory();
 }
