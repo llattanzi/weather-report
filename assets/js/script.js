@@ -13,7 +13,7 @@ var getCoordinates = function(city) {
             if (response.ok) {
                 response.json().then(function(data) {
                     console.log(data);
-                    getCurrentWeather(data[0].lat, data[0].lon, city);
+                    getWeather(data[0].lat, data[0].lon, city);
                 })
             }
             else {
@@ -22,7 +22,7 @@ var getCoordinates = function(city) {
         })
 }
 
-var getCurrentWeather = function(lat, lon, city) {
+var getWeather = function(lat, lon, city) {
     // format openWeather api url
     var apiUrl = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&units=imperial&appid=b382fc1462adf9eba28383207f67b071";
 
@@ -46,14 +46,17 @@ var getCurrentWeather = function(lat, lon, city) {
 };
 
 var displayWeather = function(data, city) {
-    // get current date wrt city timezone
-    var currentDate = moment().tz(data.timezone).format("M/DD/YYYY");
+    // set visibility of city weather html
+    $("#city-weather").show();
+
+    // print items unique to current weather to page
     // build city name, current date, icon to apply to page
+    var currentDate = moment.unix(data.current.dt).tz(data.timezone).format("M/DD/YYYY");
     var cityInfo = city + " (" + currentDate + ") ";
     $("#city-info").text(cityInfo);
     var iconCode = data.current.weather[0].icon;
     var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-    $("#current-icon").attr('src', iconUrl);
+    $(".icon").eq(0).attr('src', iconUrl);
 
     // add current weather info to page
     $(".temperature").eq(0).text(data.current.temp);
@@ -70,6 +73,23 @@ var displayWeather = function(data, city) {
     }
     else {
         $(".uv").eq(0).attr("class", "uv uv-severe");
+    }
+
+    // daily forecast object starts with current day at 0 index. for future forecast, start index at 1
+    for (i = 1; i < forecastDays + 1; i++) {
+        console.log(i)
+        // get date wrt city timezone
+        currentDate = moment.unix(data.daily[i].dt).tz(data.timezone).format("M/DD/YYYY");
+        console.log(currentDate)
+        $(".date").eq(i-1).text(currentDate);
+        iconCode = data.daily[i].weather[0].icon;
+        iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        $(".icon").eq(i).attr('src', iconUrl);
+
+        // add current weather info to page
+        $(".temperature").eq(i).text(data.daily[i].temp.day);
+        $(".wind").eq(i).text(data.daily[i].wind_speed);
+        $(".humidity").eq(i).text(data.daily[i].humidity);
     }
 }
 

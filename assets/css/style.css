@@ -38,6 +38,10 @@ span {
     white-space: pre-wrap;
 }
 
+img {
+    max-width: 65px;
+}
+
 .uv {
     color: white;
     padding: 0 10px;
@@ -65,5 +69,10 @@ span {
     color: white;
     margin-bottom: 10px;
     padding-top: 5px;
+}
+
+/* hide html element structure for city weather at page load */
+#city-weather {
+    display: none;
 }
 
