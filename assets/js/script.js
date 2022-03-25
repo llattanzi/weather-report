@@ -10,7 +10,7 @@ var historyLimit = 10;
 // get latitude and longitude coordinates of city to use as input to One Call Open Weather API
 var getCoordinates = function(city) {
     // format Geocoding api url
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=b382fc1462adf9eba28383207f67b071";
+    var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=b382fc1462adf9eba28383207f67b071";
 
     // make request to url
     fetch(apiUrl)
@@ -29,7 +29,7 @@ var getCoordinates = function(city) {
 
 var getWeather = function(lat, lon, city) {
     // format openWeather api url
-    var apiUrl = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&units=imperial&appid=b382fc1462adf9eba28383207f67b071";
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly&units=imperial&appid=b382fc1462adf9eba28383207f67b071";
 
     // make request to url
     fetch(apiUrl)
@@ -61,7 +61,7 @@ var displayWeather = function(data, city) {
     var cityInfo = city + " (" + currentDate + ") ";
     $("#city-info").text(cityInfo);
     var iconCode = data.current.weather[0].icon;
-    var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+    var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
     $(".icon").eq(0).attr('src', iconUrl);
 
     // add current weather info to page
@@ -90,7 +90,7 @@ var displayWeather = function(data, city) {
         $(".date").eq(i-1).text(currentDate);
         // get weather icon code to create url to image source
         iconCode = data.daily[i].weather[0].icon;
-        iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+        iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
         $(".icon").eq(i).attr('src', iconUrl);
 
         // add current weather info to page
