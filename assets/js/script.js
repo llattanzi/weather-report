@@ -1,7 +1,13 @@
+var cityWeather = {
+    city: [],
+    weather: []
+};
+
 // constants
 var uvFavorableLimit = 4;
 var uvModerateLimit = 7;
 var forecastDays = 5;
+var historyLimit = 10;
 
 var getCoordinates = function(city) {
     // format Geocoding api url
@@ -91,11 +97,58 @@ var displayWeather = function(data, city) {
         $(".wind").eq(i).text(data.daily[i].wind_speed);
         $(".humidity").eq(i).text(data.daily[i].humidity);
     }
+
+    addHistory(data, city);
 }
 
+var addHistory = function(data, city) {
+    // add city button to page
+    var cityButton = $("<button>")
+        .addClass("btn btn-history mt-3")
+        .text(city);
+
+    // if city history reaches the limit, remove oldest search result element
+        if ($(".btn-history").length == historyLimit) {
+        $(".btn-history").eq(0).remove();
+    }
+
+    $(".city-history").append(cityButton);
+    
+    cityWeather.city.push(city);
+    cityWeather.weather.push(data);
+    // limit history length in local storage
+    if (cityWeather > historyLimit) {
+        // if hit limit, remove oldest search
+        cityWeather = cityWeather.slice(1, cityWeather.length);
+    }
+    localStorage.setItem("cityWeather", JSON.stringify(cityWeather));
+}
+
+var loadHistory = function() {
+    for (i = 0; i < cityWeather.city.length; i++) {
+      var cityButton = $("<button>")
+        .addClass("btn btn-history mt-3")
+        .text(cityWeather.city[i]);
+
+        $(".city-history").append(cityButton);  
+    }
+}
+
+// search button clicked
 $(".btn-search").click(function() {
     var city = $(".form-control").val();
     // clear search form
     $(".form-control").val("");
     getCoordinates(city);
 })
+
+// city button clicked in history list
+$(".city-history").on("click", "button", function() {
+    var buttonIndex = $(this).index();
+    console.log(buttonIndex)
+})
+
+if (localStorage.getItem("cityWeather")) {
+    cityWeather = JSON.parse(localStorage.getItem("cityWeather"));
+    loadHistory();
+}
