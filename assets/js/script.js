@@ -1,3 +1,4 @@
+// initialize variable to hold search history
 var cities = [];
 
 // constants
@@ -6,6 +7,7 @@ var uvModerateLimit = 7;
 var forecastDays = 5;
 var historyLimit = 10;
 
+// get latitude and longitude coordinates of city to use as input to One Call Open Weather API
 var getCoordinates = function(city) {
     // format Geocoding api url
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=b382fc1462adf9eba28383207f67b071";
@@ -39,6 +41,7 @@ var getWeather = function(lat, lon, city) {
                     displayWeather(data, city);
                 })
             }
+            // if not successful
             else {
                 alert("Weather data not available")
             }
@@ -83,8 +86,9 @@ var displayWeather = function(data, city) {
         console.log(i)
         // get date wrt city timezone
         currentDate = moment.unix(data.daily[i].dt).tz(data.timezone).format("M/DD/YYYY");
-        console.log(currentDate)
+        // first instance of date does not appear until forecast cards. must start index at 0
         $(".date").eq(i-1).text(currentDate);
+        // get weather icon code to create url to image source
         iconCode = data.daily[i].weather[0].icon;
         iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
         $(".icon").eq(i).attr('src', iconUrl);
@@ -118,6 +122,7 @@ var addHistory = function(city) {
         $(".btn-history").eq(0).remove();
     }
 
+    // add new city button to end of city history list
     $(".city-history").append(cityButton);
     
     cities.push(city);
@@ -127,15 +132,18 @@ var addHistory = function(city) {
         // if hit limit, remove oldest search
         cities = cities.slice(1, cities.length);
     }
+    // set cities array in local storage
     localStorage.setItem("cities", JSON.stringify(cities));
 }
 
+// get city history from local storage and display history to page
 var loadHistory = function() {
     for (i = 0; i < cities.length; i++) {
+        // create a new button for saved city
       var cityButton = $("<button>")
         .addClass("btn btn-history mt-3")
         .text(cities[i]);
-
+        // add button to end of city history list
         $(".city-history").append(cityButton);  
     }
 }
@@ -156,6 +164,7 @@ $(".city-history").on("click", "button", function() {
     getCoordinates(cities[buttonIndex]); 
 })
 
+// if there are saved cities in the history, load to page
 if (localStorage.getItem("cities")) {
     cities = JSON.parse(localStorage.getItem("cities"));
     loadHistory();
